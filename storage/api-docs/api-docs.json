@@ -1,0 +1,280 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "APIs For Testing",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/odata/products": {
+            "get": {
+                "tags": [
+                    "OData"
+                ],
+                "summary": "Get Products",
+                "description": "Retrieve a list of products with OData query support.",
+                "operationId": "6e8a4a2b4692b53a1bf81db8bcce4c04",
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter the results",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "$orderby",
+                        "in": "query",
+                        "description": "Order the results",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "description": "Limit the number of results",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "$skip",
+                        "in": "query",
+                        "description": "Skip the number of results",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "price": {
+                                                "type": "number"
+                                            },
+                                            "category": {
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "OData"
+                ],
+                "summary": "Create Product",
+                "description": "Create a new product.",
+                "operationId": "534a7b79250d61c83189131f02a8815f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "price",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "category_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created successfully."
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/odata/products/{id}": {
+            "put": {
+                "tags": [
+                    "OData"
+                ],
+                "summary": "Update Product",
+                "description": "Update an existing product.",
+                "operationId": "9754fa472ac12906f242fb3b9be22a4a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "price",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "category_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product updated successfully."
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "OData"
+                ],
+                "summary": "Delete Product",
+                "description": "Delete a product by ID.",
+                "operationId": "80df9402e56d9eced4100db4c0102ba8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Product deleted successfully."
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/api/home": {
+            "post": {
+                "tags": [
+                    "Home"
+                ],
+                "summary": "Home data",
+                "description": "",
+                "operationId": "abafb0f86a9cf6ab5f4b5926383645d6",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Provide your name",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "OData",
+            "description": "OData"
+        },
+        {
+            "name": "Home",
+            "description": "Home"
+        }
+    ]
+}
